@@ -1,0 +1,11 @@
+package dice
+
+import "math/rand"
+
+func(dice Dice) Roll(max int, count int) (result []int) {
+	for i := 0; i < count; i++ {
+		result = append(result, rand.Intn(max) + 1)
+	}
+
+	return result
+}
