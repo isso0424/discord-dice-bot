@@ -26,9 +26,17 @@ func Judge(channelID string, args []string, d dice.Dice, session *discordgo.Sess
 
 	var status string
 	if result <= target {
-		status = "成功!"
+		if (result <= 5) {
+			status = "クリティカル!"
+		} else {
+			status = "成功!"
+		}
 	} else {
-		status = "失敗"
+		if (result >= 96) {
+			status = "ファンブル!"
+		} else {
+			status = "失敗"
+		}
 	}
 
 	session.ChannelMessageSend(channelID, fmt.Sprintf("目標値: %d\nダイス: %d\n結果: %s", target, result, status))
