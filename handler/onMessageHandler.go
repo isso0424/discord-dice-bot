@@ -2,8 +2,9 @@ package handler
 
 import (
 	"isso0424/dice/dice"
-	"isso0424/dice/parser"
+	"isso0424/dice/handler/judge"
 	"isso0424/dice/handler/roll"
+	"isso0424/dice/parser"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -24,5 +25,9 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 
 	if command == "!roll" && len(args) != 0 {
 		roll.Roll(event.ChannelID, args, d, session)
+	}
+
+	if command == "!judge" && len(args) != 0 {
+		judge.Judge(event.ChannelID, args, d, session)
 	}
 }
