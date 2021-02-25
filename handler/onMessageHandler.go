@@ -1,11 +1,9 @@
 package handler
 
 import (
-	"errors"
 	"fmt"
 	"isso0424/dice/dice"
-	"strconv"
-	"strings"
+	"isso0424/dice/parser"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -17,14 +15,20 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 		return
 	}
 
-	if strings.HasPrefix(event.Content, "!roll") && len(strings.Split(event.Content, " ")) > 1 {
-		commands := strings.Split(event.Content, " ")[1:]
+	command, args, err := parser.ParseCommand(event.Content)
+	if err != nil {
+		session.ChannelMessageSend(event.ChannelID, "command parsing error")
+
+		return
+	}
+
+	if command == "!roll" && len(args) != 0 {
 
 		resultSum := 0
 		resultString := "["
 
-		for _, command := range commands {
-			max, count, err := diceRollParsing(command)
+		for _, command := range args {
+			count, max, err := parser.ParseDice(command)
 			if err != nil {
 				session.ChannelMessageSend(event.ChannelID, err.Error())
 
@@ -52,23 +56,4 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 		}
 		fmt.Println(resultString)
 	}
-}
-
-func diceRollParsing(text string) (int, int, error) {
-	command := strings.Split(text, "D")
-	if len(command) < 2 {
-		return 0, 0, errors.New("invalid command")
-	}
-
-	count, err := strconv.Atoi(command[0])
-	if err != nil {
-		return 0, 0, errors.New("parsing error")
-	}
-
-	max, err := strconv.Atoi(command[1])
-	if err != nil {
-		return 0, 0, errors.New("parsing error")
-	}
-
-	return max, count, nil
 }
