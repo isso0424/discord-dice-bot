@@ -17,24 +17,30 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 		return
 	}
 
-	if strings.HasPrefix(event.Content, "!roll") {
-		max, count, err := diceRollParsing(event.Content)
-		if err != nil {
-			session.ChannelMessageSend(event.ChannelID, err.Error())
+	if strings.HasPrefix(event.Content, "!roll") && len(strings.Split(event.Content, " ")) > 1 {
+		commands := strings.Split(event.Content, " ")[1:]
 
-			return
-		}
-		fmt.Println(max)
-		result := d.Roll(max, count)
 		resultSum := 0
 		resultString := "["
-		for _, value := range result {
-			resultSum += value
-			resultString += fmt.Sprintf("%d,", value)
+
+		for _, command := range commands {
+			max, count, err := diceRollParsing(command)
+			if err != nil {
+				session.ChannelMessageSend(event.ChannelID, err.Error())
+
+				return
+			}
+
+			result := d.Roll(max, count)
+			for _, value := range result {
+				resultSum += value
+				resultString += fmt.Sprintf("%d,", value)
+			}
 		}
+
 		resultString += "]"
 
-		_, err = session.ChannelMessageSend(event.ChannelID, fmt.Sprintf("合計: %d %s", resultSum, resultString))
+		_, err := session.ChannelMessageSend(event.ChannelID, fmt.Sprintf("合計: %d %s", resultSum, resultString))
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -43,12 +49,7 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 }
 
 func diceRollParsing(text string) (int, int, error) {
-	texts := strings.Split(text, " ")
-	if len(texts) < 2 {
-		return 0, 0, errors.New("invalid command")
-	}
-
-	command := strings.Split(texts[1], "D")
+	command := strings.Split(text, "D")
 	if len(command) < 2 {
 		return 0, 0, errors.New("invalid command")
 	}
