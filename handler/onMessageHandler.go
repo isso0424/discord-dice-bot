@@ -31,6 +31,12 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 				return
 			}
 
+			if (max < 1 || count < 1) {
+				session.ChannelMessageSend(event.ChannelID, "値は1以上でなければいけません")
+
+				return
+			}
+
 			result := d.Roll(max, count)
 			for _, value := range result {
 				resultSum += value
