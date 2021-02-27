@@ -7,7 +7,7 @@ import (
 
 func ParseCommand(text string) (command string, args []string, err error) {
 	texts := strings.Split(text, " ")
-	if len(texts) == 0 {
+	if texts[0] == "" {
 		err = errors.New("command not provides")
 
 		return
