@@ -9,3 +9,7 @@ func(dice Dice) Roll(max int, count int) (result []int) {
 
 	return result
 }
+
+func(dice Dice) RollOne(max int) (result int) {
+	return rand.Intn(max) + 1
+}

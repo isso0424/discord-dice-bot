@@ -2,42 +2,25 @@ package roll
 
 import (
 	"fmt"
-	"isso0424/dice/dice"
-	"isso0424/dice/parser"
 
 	"github.com/bwmarrin/discordgo"
 )
 
-func Roll(channelID string, args []string, d dice.Dice, session *discordgo.Session) {
-	resultSum := 0
-	resultString := "["
+func Roll(channelID string, args []string, session *discordgo.Session) {
+	results, err := allRoll(args)
+	if err != nil {
+		session.ChannelMessageSend(channelID, err.Error())
 
-	for _, command := range args {
-		count, max, err := parser.ParseDice(command)
-		if err != nil {
-			session.ChannelMessageSend(channelID, err.Error())
-
-			return
-		}
-
-		if (max < 1 || count < 1) {
-			session.ChannelMessageSend(channelID, "値は1以上でなければいけません")
-
-			return
-		}
-
-		result := d.Roll(max, count)
-		for _, value := range result {
-			resultSum += value
-			resultString += fmt.Sprintf("%d,", value)
-		}
+		return
 	}
 
-	resultString += "]"
+	message := joinResults(results)
 
-	_, err := session.ChannelMessageSend(channelID, fmt.Sprintf("合計: %d %s", resultSum, resultString))
+	_, err = session.ChannelMessageSend(channelID, message)
 	if err != nil {
 		fmt.Println(err)
+
+		return
 	}
-	fmt.Println(resultString)
+	fmt.Println(message)
 }
