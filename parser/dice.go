@@ -14,7 +14,7 @@ func ParseDice(text string) (count int, max int, err error) {
 	}
 
 	texts := strings.Split(text, "D")
-	if len(texts) < 2 {
+	if len(texts) != 2 {
 		err = errors.New("invalid dice")
 
 		return
