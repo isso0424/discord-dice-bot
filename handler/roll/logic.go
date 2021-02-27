@@ -1,7 +1,6 @@
 package roll
 
 import (
-	"errors"
 	"fmt"
 	"strconv"
 
@@ -16,12 +15,10 @@ func allRoll(args []string) (results []int, err error) {
 	for index, arg := range args {
 		count, max, err := parser.ParseDice(arg)
 		if err != nil {
-			return nil, errors.New(fmt.Sprintf("%s: on %d dice", err, index + 1))
+			return nil, fmt.Errorf("%s: on %d dice", err, index+1)
 		}
 		result := d.Roll(max, count)
-		for _, value := range result {
-			results = append(results, value)
-		}
+		results = append(results, result...)
 	}
 
 	return
@@ -34,7 +31,7 @@ func joinResults(results []int) string {
 	for index, result := range results {
 		resultSum += result
 		resultString += strconv.Itoa(result)
-		if index + 1 != len(results) {
+		if index+1 != len(results) {
 			resultString += ","
 		}
 	}

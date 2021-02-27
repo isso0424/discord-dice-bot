@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"isso0424/dice/handler/judge"
 	"isso0424/dice/handler/roll"
 	"isso0424/dice/parser"
@@ -15,7 +16,10 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 
 	command, args, err := parser.ParseCommand(event.Content)
 	if err != nil {
-		session.ChannelMessageSend(event.ChannelID, "command parsing error")
+		_, err = session.ChannelMessageSend(event.ChannelID, "command parsing error")
+		if err != nil {
+			fmt.Println(err)
+		}
 
 		return
 	}

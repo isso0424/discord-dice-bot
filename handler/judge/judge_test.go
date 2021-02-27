@@ -10,7 +10,7 @@ const shouldOccurErrorMessage = "should occur error with %s"
 
 func TestCompareResult(t *testing.T) {
 	target := 50
-	critical := 5;
+	critical := 5
 	success := 30
 	fail := 70
 	fumble := 96

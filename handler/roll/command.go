@@ -9,7 +9,12 @@ import (
 func Roll(channelID string, args []string, session *discordgo.Session) {
 	results, err := allRoll(args)
 	if err != nil {
-		session.ChannelMessageSend(channelID, err.Error())
+		_, err = session.ChannelMessageSend(channelID, err.Error())
+		if err != nil {
+			fmt.Println(err)
+
+			return
+		}
 
 		return
 	}

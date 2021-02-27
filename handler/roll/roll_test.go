@@ -24,7 +24,7 @@ func TestAllRollFail(t *testing.T) {
 	dices := []string{"3D"}
 	_, err := allRoll(dices)
 	if err == nil {
-		t.Fatal(err.Error())
+		t.Fatalf(shouldOccurErrorMessage, "invalid dice")
 
 		return
 	}

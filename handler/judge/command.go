@@ -12,7 +12,10 @@ func Judge(channelID string, args []string, session *discordgo.Session) {
 
 	target, err := validateArgs(args)
 	if err != nil {
-		session.ChannelMessageSend(channelID, err.Error())
+		_, err = session.ChannelMessageSend(channelID, err.Error())
+		if err != nil {
+			fmt.Println(err)
+		}
 
 		return
 	}
@@ -20,5 +23,8 @@ func Judge(channelID string, args []string, session *discordgo.Session) {
 	diceResult := d.RollOne(100)
 	result := compareResult(target, diceResult)
 
-	session.ChannelMessageSend(channelID, fmt.Sprintf("目標値: %d\nダイス: %d\n結果: %s", target, diceResult, result.String()))
+	_, err = session.ChannelMessageSend(channelID, fmt.Sprintf("目標値: %d\nダイス: %d\n結果: %s", target, diceResult, result.String()))
+	if err != nil {
+		fmt.Println(err)
+	}
 }
