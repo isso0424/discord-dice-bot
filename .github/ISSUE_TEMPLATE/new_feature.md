@@ -2,7 +2,7 @@
 name: new_feature
 about: 新機能の提案
 title: ''
-labels: ''
+labels: 'enhancement'
 assignees: ''
 
 ---
