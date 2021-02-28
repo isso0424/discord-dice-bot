@@ -3,16 +3,15 @@ package judge
 import (
 	"fmt"
 	"isso0424/dise/dice"
-
-	"github.com/bwmarrin/discordgo"
+	"isso0424/dise/types"
 )
 
-func Judge(channelID string, args []string, session *discordgo.Session) {
+func Judge(channelID string, args []string, session types.Session) {
 	d := dice.New()
 
 	target, err := validateArgs(args)
 	if err != nil {
-		_, err = session.ChannelMessageSend(channelID, err.Error())
+		err = session.Send(channelID, err.Error())
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -23,7 +22,7 @@ func Judge(channelID string, args []string, session *discordgo.Session) {
 	diceResult := d.RollOne(100)
 	result := compareResult(target, diceResult)
 
-	_, err = session.ChannelMessageSend(channelID, fmt.Sprintf("目標値: %d\nダイス: %d\n結果: %s", target, diceResult, result.String()))
+	err = session.Send(channelID, fmt.Sprintf("目標値: %d\nダイス: %d\n結果: %s", target, diceResult, result.String()))
 	if err != nil {
 		fmt.Println(err)
 	}

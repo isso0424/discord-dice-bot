@@ -2,14 +2,13 @@ package roll
 
 import (
 	"fmt"
-
-	"github.com/bwmarrin/discordgo"
+	"isso0424/dise/types"
 )
 
-func Roll(channelID string, args []string, session *discordgo.Session) {
+func Roll(channelID string, args []string, session types.Session) {
 	results, err := allRoll(args)
 	if err != nil {
-		_, err = session.ChannelMessageSend(channelID, err.Error())
+		err = session.Send(channelID, err.Error())
 		if err != nil {
 			fmt.Println(err)
 
@@ -21,7 +20,7 @@ func Roll(channelID string, args []string, session *discordgo.Session) {
 
 	message := joinResults(results)
 
-	_, err = session.ChannelMessageSend(channelID, message)
+	err = session.Send(channelID, message)
 	if err != nil {
 		fmt.Println(err)
 

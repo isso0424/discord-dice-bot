@@ -1,5 +1,7 @@
 package types
 
+type any interface {}
+
 type Session interface {
-	ChannelMessageSend(string, string) error
+	Send(string, string) error
 }
