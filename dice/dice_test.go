@@ -21,3 +21,16 @@ func TestDiceRoll(t *testing.T) {
 
 	assert.Equal(t, 100, len(result))
 }
+
+func TestDiceRollOne(t *testing.T) {
+	d := dice.New()
+
+	for i := 0; i < 100; i++ {
+		result := d.RollOne(3)
+		if result > 3 || result < 1 {
+			t.Fatal("Broken dice")
+
+			return
+		}
+	}
+}

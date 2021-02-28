@@ -1,60 +1,55 @@
-package judge
+package judge_test
 
 import (
+	"fmt"
+	"isso0424/dise/handler/console"
+	"isso0424/dise/handler/judge"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-const shouldOccurErrorMessage = "should occur error with %s"
+const shouldErrorOccur = "should error occur with %s"
 
-func TestCompareResult(t *testing.T) {
-	target := 50
-	critical := 5
-	success := 30
-	fail := 70
-	fumble := 96
+func TestJudgeSuccess(t *testing.T) {
+	session := console.New()
+	channelID := "hoge"
+	args := []string{ "100" }
 
-	r := compareResult(target, critical)
-	assert.Equal(t, "クリティカル", r.String())
-
-	r = compareResult(target, success)
-	assert.Equal(t, "成功", r.String())
-
-	r = compareResult(target, fail)
-	assert.Equal(t, "失敗", r.String())
-
-	r = compareResult(target, fumble)
-	assert.Equal(t, "ファンブル", r.String())
-}
-
-func TestValidateArgsSuccess(t *testing.T) {
-	args := []string{"1", "2"}
-	result, err := validateArgs(args)
+	err := judge.Judge(channelID, args, session)
 	if err != nil {
 		t.Fatal(err)
-
-		return
 	}
-
-	assert.Equal(t, 1, result)
 }
 
-func TestValidateArgsFail(t *testing.T) {
-	args := []string{"hoge", "fuga"}
-	_, err := validateArgs(args)
-	if err == nil {
-		t.Fatalf(shouldOccurErrorMessage, "string args")
+func TestJudgeFail(t *testing.T) {
+	session := console.New()
+	channelID := "hoge"
+	args := []string{ "100" }
 
-		return
+	invalidChannelID := ""
+	err := judge.Judge(invalidChannelID, args, session)
+	if err == nil {
+		t.Fatal(fmt.Sprintf(shouldErrorOccur, "invalid channel ID"))
 	}
 
-	args = []string{}
-
-	_, err = validateArgs(args)
+	invalidArgs := []string{ "invalid" }
+	err = judge.Judge(channelID, invalidArgs, session)
 	if err == nil {
-		t.Fatalf(shouldOccurErrorMessage, "too few args")
-
-		return
+		t.Fatal(fmt.Sprintf(shouldErrorOccur, "invalid args"))
 	}
+}
+
+func TestDiceResult(t *testing.T) {
+	success := judge.DiceResult(0)
+	fail := judge.DiceResult(1)
+	critical := judge.DiceResult(2)
+	fumble := judge.DiceResult(3)
+	unknown := judge.DiceResult(4)
+
+	assert.Equal(t, "成功", success.String())
+	assert.Equal(t, "失敗", fail.String())
+	assert.Equal(t, "クリティカル", critical.String())
+	assert.Equal(t, "ファンブル", fumble.String())
+	assert.Equal(t, "異常な値です", unknown.String())
 }
