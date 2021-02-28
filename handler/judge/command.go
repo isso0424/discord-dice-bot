@@ -6,24 +6,18 @@ import (
 	"isso0424/dise/types"
 )
 
-func Judge(channelID string, args []string, session types.Session) {
+func Judge(channelID string, args []string, session types.Session) error {
 	d := dice.New()
 
 	target, err := validateArgs(args)
 	if err != nil {
-		err = session.Send(channelID, err.Error())
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		return
+		return err
 	}
 
 	diceResult := d.RollOne(100)
 	result := compareResult(target, diceResult)
 
 	err = session.Send(channelID, fmt.Sprintf("目標値: %d\nダイス: %d\n結果: %s", target, diceResult, result.String()))
-	if err != nil {
-		fmt.Println(err)
-	}
+
+	return err
 }

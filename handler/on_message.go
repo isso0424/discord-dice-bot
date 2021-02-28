@@ -10,6 +10,8 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+const errorMessage = "エラーが発生しました"
+
 func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate) {
 	if event.Author.ID == session.State.User.ID {
 		return
@@ -28,10 +30,18 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 	}
 
 	if command == "!roll" && len(args) != 0 {
-		roll.Roll(event.ChannelID, args, s)
+		err = roll.Roll(event.ChannelID, args, s)
+		if err != nil {
+			s.Send(event.ChannelID, errorMessage)
+			fmt.Println(err)
+		}
 	}
 
 	if command == "!judge" && len(args) != 0 {
-		judge.Judge(event.ChannelID, args, s)
+		err = judge.Judge(event.ChannelID, args, s)
+		if err != nil {
+			s.Send(event.ChannelID, errorMessage)
+			fmt.Println(err)
+		}
 	}
 }

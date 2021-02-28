@@ -5,26 +5,19 @@ import (
 	"isso0424/dise/types"
 )
 
-func Roll(channelID string, args []string, session types.Session) {
+func Roll(channelID string, args []string, session types.Session) error {
 	results, err := allRoll(args)
 	if err != nil {
-		err = session.Send(channelID, err.Error())
-		if err != nil {
-			fmt.Println(err)
-
-			return
-		}
-
-		return
+		return err
 	}
 
 	message := joinResults(results)
 
 	err = session.Send(channelID, message)
 	if err != nil {
-		fmt.Println(err)
-
-		return
+		return err
 	}
 	fmt.Println(message)
+
+	return nil
 }
