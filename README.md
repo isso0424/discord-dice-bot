@@ -4,6 +4,7 @@
 [![Test](https://github.com/isso0424/dise/actions/workflows/test.yml/badge.svg)](https://github.com/isso0424/dise/actions/workflows/test.yml)
 [![Issue](https://img.shields.io/github/issues/isso0424/dise)](https://github.com/isso0424/dise/issues)
 ![Language](https://img.shields.io/github/languages/top/isso0424/dise)
+![License](https://img.shields.io/github/license/isso0424/dise)
 ## About
 Dice bot for discord.
 
