@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"isso0424/dice/dice"
-	"isso0424/dice/parser"
+	"isso0424/dise/dice"
+	"isso0424/dise/parser"
 )
 
 const resultFormat = "合計: %d [%s]"

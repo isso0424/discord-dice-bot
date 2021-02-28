@@ -2,9 +2,9 @@ package handler
 
 import (
 	"fmt"
-	"isso0424/dice/handler/judge"
-	"isso0424/dice/handler/roll"
-	"isso0424/dice/parser"
+	"isso0424/dise/handler/judge"
+	"isso0424/dise/handler/roll"
+	"isso0424/dise/parser"
 
 	"github.com/bwmarrin/discordgo"
 )

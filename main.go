@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"isso0424/dice/handler"
+	"isso0424/dise/handler"
 	"os"
 	"os/signal"
 	"syscall"

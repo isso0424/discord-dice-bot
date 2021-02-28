@@ -1,7 +1,7 @@
 package parser_test
 
 import (
-	"isso0424/dice/parser"
+	"isso0424/dise/parser"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
