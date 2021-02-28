@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"isso0424/dise/handler"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -23,6 +24,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	log.Println("bot booted!!!")
 
 	defer discord.Close()
 	if err != nil {

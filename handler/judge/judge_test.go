@@ -14,7 +14,7 @@ const shouldErrorOccur = "should error occur with %s"
 func TestJudgeSuccess(t *testing.T) {
 	session := console.New()
 	channelID := "hoge"
-	args := []string{ "100" }
+	args := []string{"100"}
 
 	err := judge.Judge(channelID, args, session)
 	if err != nil {
@@ -25,7 +25,7 @@ func TestJudgeSuccess(t *testing.T) {
 func TestJudgeFail(t *testing.T) {
 	session := console.New()
 	channelID := "hoge"
-	args := []string{ "100" }
+	args := []string{"100"}
 
 	invalidChannelID := ""
 	err := judge.Judge(invalidChannelID, args, session)
@@ -33,7 +33,7 @@ func TestJudgeFail(t *testing.T) {
 		t.Fatal(fmt.Sprintf(shouldErrorOccur, "invalid channel ID"))
 	}
 
-	invalidArgs := []string{ "invalid" }
+	invalidArgs := []string{"invalid"}
 	err = judge.Judge(channelID, invalidArgs, session)
 	if err == nil {
 		t.Fatal(fmt.Sprintf(shouldErrorOccur, "invalid args"))

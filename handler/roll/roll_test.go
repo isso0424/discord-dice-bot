@@ -12,7 +12,7 @@ const shouldErrorOccur = "should error occur with %s"
 func TestRollSuccess(t *testing.T) {
 	session := console.New()
 	channelID := "hoge"
-	dices := []string{ "3D6", "1D10", "2D2" }
+	dices := []string{"3D6", "1D10", "2D2"}
 
 	err := roll.Roll(channelID, dices, session)
 	if err != nil {
@@ -23,7 +23,7 @@ func TestRollSuccess(t *testing.T) {
 func TestRollFail(t *testing.T) {
 	session := console.New()
 	channelID := "hoge"
-	dices := []string{ "3D6", "1D10", "2D2" }
+	dices := []string{"3D6", "1D10", "2D2"}
 
 	invalidChannelID := ""
 	err := roll.Roll(invalidChannelID, dices, session)
@@ -31,7 +31,7 @@ func TestRollFail(t *testing.T) {
 		t.Fatal(fmt.Sprintf(shouldErrorOccur, "empty channelID"))
 	}
 
-	invalidArgs := []string{ "invalid" }
+	invalidArgs := []string{"invalid"}
 	err = roll.Roll(channelID, invalidArgs, session)
 	if err == nil {
 		t.Fatal(fmt.Sprintf(shouldErrorOccur, "invalid args"))

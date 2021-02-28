@@ -12,6 +12,6 @@ func (s session) Send(channelID string, message string) error {
 	return err
 }
 
-func CreateSenderFromSession(s *discordgo.Session) (session) {
-	return session{ session: s }
+func CreateSenderFromSession(s *discordgo.Session) session {
+	return session{session: s}
 }
