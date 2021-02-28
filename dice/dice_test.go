@@ -1,7 +1,7 @@
 package dice_test
 
 import (
-	"isso0424/dice/dice"
+	"isso0424/dise/dice"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

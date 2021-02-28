@@ -2,7 +2,7 @@ package judge
 
 import (
 	"fmt"
-	"isso0424/dice/dice"
+	"isso0424/dise/dice"
 
 	"github.com/bwmarrin/discordgo"
 )
