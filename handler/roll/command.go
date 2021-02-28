@@ -1,8 +1,8 @@
 package roll
 
 import (
-	"fmt"
 	"isso0424/dise/types"
+	"log"
 )
 
 func Roll(channelID string, args []string, session types.Session) error {
@@ -17,7 +17,7 @@ func Roll(channelID string, args []string, session types.Session) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(message)
+	log.Println(message)
 
 	return nil
 }

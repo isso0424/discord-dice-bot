@@ -7,7 +7,7 @@ import (
 
 const messageTemplate = "channelID: %s message: %s\n"
 
-type session struct {}
+type session struct{}
 
 func (s session) Send(channelID string, message string) error {
 	if len(message) > 2000 {

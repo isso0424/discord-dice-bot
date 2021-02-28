@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"fmt"
 	"isso0424/dise/handler/discord"
 	"isso0424/dise/handler/judge"
 	"isso0424/dise/handler/roll"
 	"isso0424/dise/parser"
+	"log"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -23,7 +23,7 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 	if err != nil {
 		_, err = session.ChannelMessageSend(event.ChannelID, "command parsing error")
 		if err != nil {
-			fmt.Println(err)
+			log.Println(err)
 		}
 
 		return
@@ -33,7 +33,7 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 		err = roll.Roll(event.ChannelID, args, s)
 		if err != nil {
 			s.Send(event.ChannelID, errorMessage)
-			fmt.Println(err)
+			log.Println(err)
 		}
 	}
 
@@ -41,7 +41,7 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 		err = judge.Judge(event.ChannelID, args, s)
 		if err != nil {
 			s.Send(event.ChannelID, errorMessage)
-			fmt.Println(err)
+			log.Println(err)
 		}
 	}
 }
