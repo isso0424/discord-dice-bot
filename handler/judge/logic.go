@@ -1,10 +1,5 @@
 package judge
 
-import (
-	"errors"
-	"strconv"
-)
-
 func compareResult(target int, dice int) (result DiceResult) {
 	switch {
 	case dice <= target && dice <= 5:

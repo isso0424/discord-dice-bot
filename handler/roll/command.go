@@ -26,6 +26,10 @@ func(cmd Roll) Exec(channelID string, args []string, session types.Session) erro
 }
 
 func(cmd Roll) ValidateArgs(args []string) bool {
+	if len(args) == 0 {
+		return false
+	}
+
 	for _, arg := range args {
 		_, _, err := parser.ParseDice(arg)
 		if err != nil {

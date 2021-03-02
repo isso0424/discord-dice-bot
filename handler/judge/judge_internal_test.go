@@ -28,33 +28,3 @@ func TestCompareResult(t *testing.T) {
 	assert.Equal(t, "ファンブル", r.String())
 }
 
-func TestValidateArgsSuccess(t *testing.T) {
-	args := []string{"1", "2"}
-	result, err := validateArgs(args)
-	if err != nil {
-		t.Fatal(err)
-
-		return
-	}
-
-	assert.Equal(t, 1, result)
-}
-
-func TestValidateArgsFail(t *testing.T) {
-	args := []string{"hoge", "fuga"}
-	_, err := validateArgs(args)
-	if err == nil {
-		t.Fatalf(shouldOccurErrorMessage, "string args")
-
-		return
-	}
-
-	args = []string{}
-
-	_, err = validateArgs(args)
-	if err == nil {
-		t.Fatalf(shouldOccurErrorMessage, "too few args")
-
-		return
-	}
-}
