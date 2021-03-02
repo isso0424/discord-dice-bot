@@ -2,8 +2,8 @@ package roll_test
 
 import (
 	"fmt"
+	"isso0424/dise/handler/command/roll"
 	"isso0424/dise/handler/console"
-	"isso0424/dise/handler/roll"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -43,7 +43,7 @@ func TestRollFail(t *testing.T) {
 }
 
 func TestValidateArgsSuccess(t *testing.T) {
-	args := []string{ "1D2", "3D6" }
+	args := []string{"1D2", "3D6"}
 	assert.Equal(t, true, rollCommand.ValidateArgs(args))
 }
 

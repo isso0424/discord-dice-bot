@@ -6,8 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-const shouldOccurErrorMessage = "should occur error with %s"
-
 func TestCompareResult(t *testing.T) {
 	target := 50
 	critical := 5
@@ -27,4 +25,3 @@ func TestCompareResult(t *testing.T) {
 	r = compareResult(target, fumble)
 	assert.Equal(t, "ファンブル", r.String())
 }
-

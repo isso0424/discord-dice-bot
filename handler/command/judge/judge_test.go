@@ -2,8 +2,8 @@ package judge_test
 
 import (
 	"fmt"
+	"isso0424/dise/handler/command/judge"
 	"isso0424/dise/handler/console"
-	"isso0424/dise/handler/judge"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

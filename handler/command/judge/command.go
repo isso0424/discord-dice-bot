@@ -10,7 +10,7 @@ import (
 type Judge struct {
 }
 
-func(c Judge) Exec(channelID string, args []string, session types.Session) error {
+func (c Judge) Exec(channelID string, args []string, session types.Session) error {
 	d := dice.New()
 
 	target, err := strconv.Atoi(args[0])
@@ -26,7 +26,7 @@ func(c Judge) Exec(channelID string, args []string, session types.Session) error
 	return err
 }
 
-func(c Judge) ValidateArgs(args []string) bool {
+func (c Judge) ValidateArgs(args []string) bool {
 	if len(args) == 0 {
 		return false
 	}
@@ -39,7 +39,7 @@ func(c Judge) ValidateArgs(args []string) bool {
 	return true
 }
 
-func(c Judge) GetPrefix() string {
+func (c Judge) GetPrefix() string {
 	return "!judge"
 }
 

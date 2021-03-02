@@ -6,9 +6,9 @@ import (
 	"log"
 )
 
-type Roll struct {}
+type Roll struct{}
 
-func(cmd Roll) Exec(channelID string, args []string, session types.Session) error {
+func (cmd Roll) Exec(channelID string, args []string, session types.Session) error {
 	results, err := allRoll(args)
 	if err != nil {
 		return err
@@ -25,7 +25,7 @@ func(cmd Roll) Exec(channelID string, args []string, session types.Session) erro
 	return nil
 }
 
-func(cmd Roll) ValidateArgs(args []string) bool {
+func (cmd Roll) ValidateArgs(args []string) bool {
 	if len(args) == 0 {
 		return false
 	}
@@ -40,10 +40,10 @@ func(cmd Roll) ValidateArgs(args []string) bool {
 	return true
 }
 
-func(cmd Roll) GetPrefix() string {
+func (cmd Roll) GetPrefix() string {
 	return "!roll"
 }
 
-func(cmd Roll) GetHelp() string {
+func (cmd Roll) GetHelp() string {
 	return "指定された方法でダイスを振り、合計を出力します。"
 }
