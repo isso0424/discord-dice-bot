@@ -2,10 +2,31 @@ package command
 
 import (
 	"fmt"
+	"isso0424/dise/parser"
 	"isso0424/dise/types"
+	"log"
 )
 
-func Exec(cmd Command, channelID string, args []string, session types.Session) error {
+func ExecuteCommand(text string, channelID string, session types.Session) {
+	cmd, args, err := parser.ParseCommand(text)
+	if err != nil {
+		err = session.Send(channelID, "command parsing error")
+		if err != nil {
+			log.Println(err)
+		}
+
+		return
+	}
+
+	for key, command := range commands {
+		if key == cmd {
+			err := exec(command, channelID, args, session)
+			log.Println(err)
+		}
+	}
+}
+
+func exec(cmd Command, channelID string, args []string, session types.Session) error {
 	if !cmd.ValidateArgs(args) {
 		session.Send(channelID, "引数が間違っています。")
 		return fmt.Errorf("invalid arguments: %v target: %s", args, cmd.GetPrefix())
