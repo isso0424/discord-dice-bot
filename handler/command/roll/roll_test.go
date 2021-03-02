@@ -58,3 +58,7 @@ func TestValidateArgsFail(t *testing.T) {
 func TestGetPrefix(t *testing.T) {
 	assert.Equal(t, "!roll", rollCommand.GetPrefix())
 }
+
+func TestGetHelp(t *testing.T) {
+	assert.Equal(t, "指定された方法でダイスを振り、合計を出力します。", rollCommand.GetHelp())
+}

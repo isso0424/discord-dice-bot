@@ -77,3 +77,7 @@ func TestValidateArgsFail(t *testing.T) {
 func TestGetPrefix(t *testing.T) {
 	assert.Equal(t, "!judge", judgeCommand.GetPrefix())
 }
+
+func TestGetHelp(t *testing.T) {
+	assert.Equal(t, "与えられた目標値をもとに1D100で判定します。\n目標値以下で成功です。", judgeCommand.GetHelp())
+}
