@@ -25,7 +25,7 @@ func (cmd help) Exec(channelID string, args []string, session types.Session) err
 
 func createHelpMessage() (message string) {
 	for _, command := range commands {
-		message += fmt.Sprintf("%s: %s", command.GetPrefix(), command.GetHelp())
+		message += fmt.Sprintf("%s: %s\n", command.GetPrefix(), command.GetHelp())
 	}
 
 	return

@@ -7,23 +7,28 @@ import (
 	"log"
 )
 
-func ExecuteCommand(text string, channelID string, session types.Session) {
+func ExecuteCommand(text string, channelID string, session types.Session) error {
 	cmd, args, err := parser.ParseCommand(text)
 	if err != nil {
-		err = session.Send(channelID, "command parsing error")
-		if err != nil {
-			log.Println(err)
+		e := session.Send(channelID, "command parsing error")
+		if e != nil {
+			log.Println(e)
+			return err
 		}
 
-		return
+		return err
 	}
 
 	for _, command := range commands {
 		if command.GetPrefix() == cmd {
 			err := exec(command, channelID, args, session)
 			log.Println(err)
+
+			return err
 		}
 	}
+
+	return nil
 }
 
 func exec(cmd Command, channelID string, args []string, session types.Session) error {
