@@ -22,7 +22,6 @@ func ExecuteCommand(text string, channelID string, session types.Session) error 
 	for _, command := range commands {
 		if command.GetPrefix() == cmd {
 			err := exec(command, channelID, args, session)
-			log.Println(err)
 
 			return err
 		}
