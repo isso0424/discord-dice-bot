@@ -18,8 +18,8 @@ func ExecuteCommand(text string, channelID string, session types.Session) {
 		return
 	}
 
-	for key, command := range commands {
-		if key == cmd {
+	for _, command := range commands {
+		if command.GetPrefix() == cmd {
 			err := exec(command, channelID, args, session)
 			log.Println(err)
 		}
