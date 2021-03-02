@@ -11,12 +11,14 @@ import (
 
 const shouldErrorOccur = "should error occur with %s"
 
+var judgeCommand = judge.Judge{}
+
 func TestJudgeSuccess(t *testing.T) {
 	session := console.New()
 	channelID := "hoge"
 	args := []string{"100"}
 
-	err := judge.Judge(channelID, args, session)
+	err := judgeCommand.Exec(channelID, args, session)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -28,13 +30,13 @@ func TestJudgeFail(t *testing.T) {
 	args := []string{"100"}
 
 	invalidChannelID := ""
-	err := judge.Judge(invalidChannelID, args, session)
+	err := judgeCommand.Exec(invalidChannelID, args, session)
 	if err == nil {
 		t.Fatal(fmt.Sprintf(shouldErrorOccur, "invalid channel ID"))
 	}
 
 	invalidArgs := []string{"invalid"}
-	err = judge.Judge(channelID, invalidArgs, session)
+	err = judgeCommand.Exec(channelID, invalidArgs, session)
 	if err == nil {
 		t.Fatal(fmt.Sprintf(shouldErrorOccur, "invalid args"))
 	}
@@ -52,4 +54,26 @@ func TestDiceResult(t *testing.T) {
 	assert.Equal(t, "クリティカル", critical.String())
 	assert.Equal(t, "ファンブル", fumble.String())
 	assert.Equal(t, "異常な値です", unknown.String())
+}
+
+func TestValidateArgsSuccess(t *testing.T) {
+	args := []string{"1", "2"}
+	result := judgeCommand.ValidateArgs(args)
+
+	assert.Equal(t, true, result)
+}
+
+func TestValidateArgsFail(t *testing.T) {
+	args := []string{"hoge", "fuga"}
+	result := judgeCommand.ValidateArgs(args)
+	assert.Equal(t, false, result)
+
+	args = []string{}
+
+	result = judgeCommand.ValidateArgs(args)
+	assert.Equal(t, false, result)
+}
+
+func TestGetPrefix(t *testing.T) {
+	assert.Equal(t, "!judge", judgeCommand.GetPrefix())
 }
