@@ -42,3 +42,7 @@ func(c Judge) ValidateArgs(args []string) bool {
 func(c Judge) GetPrefix() string {
 	return "!judge"
 }
+
+func (c Judge) GetHelp() string {
+	return "与えられた目標値をもとに1D100で判定します。\n目標値以下で成功です。"
+}

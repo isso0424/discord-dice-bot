@@ -43,3 +43,7 @@ func(cmd Roll) ValidateArgs(args []string) bool {
 func(cmd Roll) GetPrefix() string {
 	return "!roll"
 }
+
+func(cmd Roll) GetHelp() string {
+	return "指定された方法でダイスを振り、合計を出力します。"
+}
