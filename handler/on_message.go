@@ -15,6 +15,7 @@ const errorMessage = "エラーが発生しました"
 
 var (
 	judgeCommand = judge.Judge{}
+	rollCommand = roll.Roll{}
 )
 
 func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate) {
@@ -38,6 +39,9 @@ func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate
 	switch cmd {
 	case judgeCommand.GetPrefix():
 		err := command.Exec(judgeCommand, channelID, args, s)
+		log.Println(err)
+	case rollCommand.GetPrefix():
+		err := command.Exec(rollCommand, channelID, args, s)
 		log.Println(err)
 	}
 }
