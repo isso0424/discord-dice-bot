@@ -9,7 +9,7 @@ import (
 )
 
 func OnMessageHandler(session *discordgo.Session, event *discordgo.MessageCreate) {
-	if event.Author.ID == session.State.User.ID {
+	if event.Author.ID == session.State.User.ID || event.Content == "" {
 		return
 	}
 
