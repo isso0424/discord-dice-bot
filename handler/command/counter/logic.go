@@ -1,11 +1,17 @@
 package counter
 
 import (
+	"errors"
 	"isso0424/dise/dice"
 	"strconv"
 )
 
 func parseArgs(args []string) (active int, reaction int, err error) {
+	if len(args) < 2 {
+		err = errors.New("Invalid length")
+		return
+	}
+
 	active, err = strconv.Atoi(args[0])
 	if err != nil {
 		return
@@ -31,7 +37,7 @@ func judge(action, reaction int) diceResult {
 	}
 
 	result := d.RollOne(100)
-	if target >= result {
+	if result >= target {
 		return fail
 	}
 

@@ -24,11 +24,11 @@ func (cmd Counter) ValidateArgs(args []string) bool {
 		return false
 	}
 
-	if n, err := strconv.Atoi(args[0]); err != nil && n < 0 {
+	if n, err := strconv.Atoi(args[0]); err != nil || n < 0 {
 		return false
 	}
 
-	if n, err := strconv.Atoi(args[1]); err != nil && n < 0 {
+	if n, err := strconv.Atoi(args[1]); err != nil || n < 0 {
 		return false
 	}
 
