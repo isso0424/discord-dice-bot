@@ -7,12 +7,19 @@ import (
 )
 
 func TestJudge(t *testing.T) {
-	assert.Equal(t, diceResult(autoSuccess), judge(100, 0))
-	assert.Equal(t, diceResult(autoFailed), judge(0, 100))
-	assert.Equal(t, diceResult(success), judge(50, 0))
-	assert.Equal(t, diceResult(fail), judge(0, 50))
+	result, _ := judge(100, 0)
+	assert.Equal(t, diceResult(autoSuccess), result)
 
-	result := judge(50, 50)
+	result, _ = judge(0, 100)
+	assert.Equal(t, diceResult(autoFailed), result)
+
+	result, _ = judge(50, 0)
+	assert.Equal(t, diceResult(success), result)
+
+	result, _ = judge(0, 50)
+	assert.Equal(t, diceResult(fail), result)
+
+	result, _ = judge(50, 50)
 	assert.Equal(t, true, result == success || result == fail)
 }
 

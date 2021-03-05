@@ -15,8 +15,8 @@ func (cmd Counter) Exec(channelID string, args []string, session types.Session) 
 		return err
 	}
 
-	result := judge(action, reaction)
-	return session.Send(channelID, fmt.Sprintf("結果: %s\n", result.String()))
+	result, dice := judge(action, reaction)
+	return session.Send(channelID, fmt.Sprintf("結果: %s\n出目: %d", result.String(), dice))
 }
 
 func (cmd Counter) ValidateArgs(args []string) bool {
@@ -40,5 +40,5 @@ func (cmd Counter) GetPrefix() string {
 }
 
 func (cmd Counter) GetHelp() string {
-	return "対抗ロールを行います"
+	return "対抗ロールを行います。自動成功/失敗は出目が100で固定です。"
 }
