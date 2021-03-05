@@ -25,21 +25,21 @@ func parseArgs(args []string) (active int, reaction int, err error) {
 	return
 }
 
-func judge(action, reaction int) diceResult {
+func judge(action, reaction int) (diceResult, int) {
 	d := dice.Dice{}
 
 	target := action - reaction + 50
 	if target > 100 {
-		return autoSuccess
+		return autoSuccess, 100
 	}
 	if target < 0 {
-		return autoFailed
+		return autoFailed, 100
 	}
 
 	result := d.RollOne(100)
 	if result >= target {
-		return fail
+		return fail, result
 	}
 
-	return success
+	return success, result
 }

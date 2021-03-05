@@ -48,7 +48,7 @@ func TestCounterExecFail(t *testing.T) {
 }
 
 func TestCounterGetHelp(t *testing.T) {
-	assert.Equal(t, "対抗ロールを行います", c.GetHelp())
+	assert.Equal(t, "対抗ロールを行います。自動成功/失敗は出目が100で固定です。", c.GetHelp())
 }
 
 func TestCounterGetPrefix(t *testing.T) {
