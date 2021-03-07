@@ -7,7 +7,7 @@ import (
 	"isso0424/dise/handler/command/roll"
 )
 
-var commands = []Command{
+var Commands = []Command{
 	counter.Counter{},
 	judge.Judge{},
 	roll.Roll{},
