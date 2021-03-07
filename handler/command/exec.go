@@ -19,7 +19,7 @@ func ExecuteCommand(text string, channelID string, session types.Session) error 
 		return err
 	}
 
-	for _, command := range commands {
+	for _, command := range Commands {
 		if command.GetPrefix() == cmd {
 			err := exec(command, channelID, args, session)
 

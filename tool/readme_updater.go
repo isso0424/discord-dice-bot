@@ -1,4 +1,14 @@
-# dise
+package tool
+
+import (
+	"fmt"
+	"isso0424/dise/handler/command"
+	"log"
+	"os"
+)
+
+const (
+	readmeTemplate = `# dise
 [![Build](https://github.com/isso0424/dise/actions/workflows/build.yml/badge.svg)](https://github.com/isso0424/dise/actions/workflows/build.yml)
 [![Lint](https://github.com/isso0424/dise/actions/workflows/lint.yml/badge.svg)](https://github.com/isso0424/dise/actions/workflows/lint.yml)
 [![Test](https://github.com/isso0424/dise/actions/workflows/test.yml/badge.svg)](https://github.com/isso0424/dise/actions/workflows/test.yml)
@@ -9,19 +19,27 @@
 Dice bot for discord.
 
 ## Usage
-### !counter
-対抗ロールを行います。自動成功/失敗は出目が100で固定です。
+`
+	usageTemplate = `### %s
+%s
 
-### !judge
-与えられた目標値をもとに1D100で判定します。
-目標値以下で成功です。
+`
+)
 
-### !roll
-指定された方法でダイスを振り、合計を出力します。
+func UpdateReadme() {
+	usageText := ""
+	for _, cmd := range command.Commands {
+		usageText += fmt.Sprintf(usageTemplate, cmd.GetPrefix(), cmd.GetHelp())
+	}
 
-### !help
-コマンド一覧を表示します
+	f, err := os.OpenFile("README.md", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
 
-### !chinchiro
-チンチロをします。
-
+	_, err = f.Write([]byte(readmeTemplate + usageText))
+	if err != nil {
+		log.Fatal(err)
+	}
+}
