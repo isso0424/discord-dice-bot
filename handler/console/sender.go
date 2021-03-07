@@ -2,6 +2,7 @@ package console
 
 import (
 	"errors"
+	"isso0424/dise/handler/command"
 	"log"
 )
 
@@ -23,7 +24,7 @@ func (s session) Send(channelID string, message string) error {
 	}
 	log.Printf(messageTemplate, channelID, message)
 
-	return nil
+	return command.ExecuteCommand(message, channelID, s)
 }
 
 func New() session {
