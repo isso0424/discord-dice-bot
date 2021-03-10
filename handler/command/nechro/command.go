@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-type Nechro struct {}
+type Nechro struct{}
 
 func (cmd Nechro) Exec(channelID string, args []string, session types.Session) error {
 	if !cmd.ValidateArgs(args) {

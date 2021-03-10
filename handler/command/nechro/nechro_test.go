@@ -14,20 +14,20 @@ var (
 )
 
 func TestExecCommandSuccess(t *testing.T) {
-	err := command.Exec("hoge", []string{ "-1" }, session)
+	err := command.Exec("hoge", []string{"-1"}, session)
 	assert.Equal(t, nil, err)
 
-	err = command.Exec("hoge", []string{ "1" }, session)
+	err = command.Exec("hoge", []string{"1"}, session)
 	assert.Equal(t, nil, err)
 }
 
 func TestExecCommandFail(t *testing.T) {
-	err := command.Exec("", []string{ "1" }, session)
+	err := command.Exec("", []string{"1"}, session)
 	if err == nil {
 		shouldErrorOccur(t, "empty channel id")
 	}
 
-	err = command.Exec("hoge", []string{ "a" }, session)
+	err = command.Exec("hoge", []string{"a"}, session)
 	if err == nil {
 		shouldErrorOccur(t, "string args")
 	}
@@ -47,13 +47,13 @@ func TestGetHelp(t *testing.T) {
 }
 
 func TestValidateArgs(t *testing.T) {
-	result := command.ValidateArgs([]string{ "1" })
+	result := command.ValidateArgs([]string{"1"})
 	assert.Equal(t, true, result)
 
-	result = command.ValidateArgs([]string{ "invalid" })
+	result = command.ValidateArgs([]string{"invalid"})
 	assert.Equal(t, false, result)
 
-	result = command.ValidateArgs([]string{ })
+	result = command.ValidateArgs([]string{})
 	assert.Equal(t, false, result)
 }
 

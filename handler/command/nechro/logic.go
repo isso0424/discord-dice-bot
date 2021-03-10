@@ -17,7 +17,7 @@ func judge(amendmentPoint int) (string, int, bool) {
 	result := calcJudgeResult(amendmentPoint)
 	r := getResultComment(result >= 6)
 
-	return fmt.Sprintf(template, amendmentPoint, result - amendmentPoint, result, r), result, result >= 6
+	return fmt.Sprintf(template, amendmentPoint, result-amendmentPoint, result, r), result, result >= 6
 }
 
 func getResultComment(result bool) string {

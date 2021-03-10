@@ -11,7 +11,7 @@ import (
 const shouldErrorOccurInHere = "should error occur with "
 
 var (
-	cmd = chinchiro.Chinchiro{}
+	cmd     = chinchiro.Chinchiro{}
 	session = console.New()
 )
 

@@ -20,7 +20,7 @@ const (
 	yakuNashi
 )
 
-func(result chinchiroResult) String() string {
+func (result chinchiroResult) String() string {
 	switch result {
 	case pinZoro:
 		return "ピンゾロ"

@@ -22,7 +22,7 @@ func parseArgs() cmdArgs {
 	isTestFlag := flag.Bool("test", false, "command line test mode")
 	flag.Parse()
 
-	return cmdArgs{ IsTestMode: *isTestFlag }
+	return cmdArgs{IsTestMode: *isTestFlag}
 }
 
 func main() {
