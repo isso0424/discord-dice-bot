@@ -10,10 +10,10 @@ type mainloop struct {
 }
 
 func New(channelID string) mainloop {
-	return mainloop{ channelID }
+	return mainloop{channelID}
 }
 
-func(loop mainloop) Start() {
+func (loop mainloop) Start() {
 	executer := console.New()
 	for {
 		fmt.Print("input text\n>>>")

@@ -25,7 +25,7 @@ func parseArgs() cmdArgs {
 	isReadmeUpdateFlag := flag.Bool("update-readme", false, "update readme with command help")
 	flag.Parse()
 
-	return cmdArgs{ IsTestMode: *isTestFlag, IsReadmeUpdateFlag: *isReadmeUpdateFlag }
+	return cmdArgs{IsTestMode: *isTestFlag, IsReadmeUpdateFlag: *isReadmeUpdateFlag}
 }
 
 func main() {
