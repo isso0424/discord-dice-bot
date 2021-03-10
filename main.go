@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"isso0424/dise/handler"
 	"isso0424/dise/tester"
+	"isso0424/dise/tool"
 	"log"
 	"os"
 	"os/signal"
@@ -16,17 +17,25 @@ import (
 
 type cmdArgs struct {
 	IsTestMode bool
+	IsReadmeUpdateFlag bool
 }
 
 func parseArgs() cmdArgs {
 	isTestFlag := flag.Bool("test", false, "command line test mode")
+	isReadmeUpdateFlag := flag.Bool("update-readme", false, "update readme with command help")
 	flag.Parse()
 
-	return cmdArgs{IsTestMode: *isTestFlag}
+	return cmdArgs{IsTestMode: *isTestFlag, IsReadmeUpdateFlag: *isReadmeUpdateFlag}
 }
 
 func main() {
 	args := parseArgs()
+
+	if args.IsReadmeUpdateFlag {
+		tool.UpdateReadme()
+		log.Println("done")
+		return
+	}
 
 	if args.IsTestMode {
 		fmt.Print("Please input channel id\n>>>")
