@@ -25,3 +25,6 @@ Dice bot for discord.
 ### !chinchiro
 チンチロをします。
 
+### !nechro
+修正値を基にネクロニカの行動判定をします。
+
